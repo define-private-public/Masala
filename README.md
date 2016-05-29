@@ -2,7 +2,7 @@ Masala Game Engine
 ==================
 Masala is an experimental game engine written in C++(14), Qt 5.x and OpenGL.  My
 goal was to see if I could make a cross platform game engine where the developer
-used ChaiScript to write all of the game logic.
+uses ChaiScript to write all of the game logic.
 
 Unfortunately, I ran into performance issues when I tried to create mass amounts
 of objects inside of ChaiScript, and determined that the current implementation
