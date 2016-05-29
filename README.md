@@ -16,7 +16,7 @@ Features
 --------
 It's fairly basic engine, but so you know what it offers:
  * 2D
- * Cross platform (Built on Linux, tested on Windows & OS X)
+ * Cross platform (Built with Linux)
  * ChaiScript oriented game programming
  * Built on Qt & OpenGL
  * Featureful sprite object (with animations!)
@@ -47,6 +47,10 @@ Building & Running
 Change into the `src/` directory.  Type `qmake` then `make` an wait a bit.  To
 play a game, just run the `masala.bin` executable`.   By default, it is setup to
 play a game called `ping`.
+
+This was developed on a Linux system.  I was able to successfully build the
+project on Windows and OS X, but I did run into some issues with the GNU
+readline dependency (commented out its usage).
 
 
 `masala.ini`
