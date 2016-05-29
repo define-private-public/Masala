@@ -78,14 +78,12 @@ See the above section (`masala.ini`) for how to change out games.
 `ping` is the default loaded game.  It's a clone of a classic atari game.  Use
 the `A` & `Z` keys for the left player, and `Up` & `Down` arrow keys for the
 right side.
-![Ping](https://gitlab.com/define-private-public/Masala/uploads/fc5e710bf9a587616160f8b94c55ff69/ping_screenshot.png)
 
 ![Ping](https://gitlab.com/define-private-public/Masala/uploads/fc5e710bf9a587616160f8b94c55ff69/ping_screenshot.png)
 
 `grab_n_dodge` is a little more complex.  You play as a green arrow that goes
 around trying to pick up purple coins, while dodging yellow enemies.  Use the
 arrow keys to move around.  Press `R` to reset the game once you've died.
-![Grab n' Dodge](https://gitlab.com/define-private-public/Masala/uploads/9b9576dd38815356396ac4428dc1642a/grab_n_dodge_cut.gif)
 
 ![Grab n' Dodge](https://gitlab.com/define-private-public/Masala/uploads/9b9576dd38815356396ac4428dc1642a/grab_n_dodge_cut.gif)
 
