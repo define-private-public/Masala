@@ -45,7 +45,7 @@ It is not included in this repository.
 Building & Running
 ------------------
 Change into the `src/` directory.  Type `qmake` then `make` an wait a bit.  To
-play a game, just run the `masala.bin` executable`.   By default, it is setup to
+play a game, just run the `masala.bin` executable.   By default, it is setup to
 play a game called `ping`.
 
 This was developed on a Linux system.  I was able to successfully build the
