@@ -1,0 +1,118 @@
+// enemy.chai -- The enemy object
+
+// Don't run into these, they will kill the g_player
+class Enemy {
+    // Public
+    var pos;            // QPointF
+    var active;         // bool
+
+    // Private
+    var _curDirection;  // Direction Enum
+    var _speed;         // double (pixels/sec)
+    var _sprite;        // MSprite
+    var _drawPos;       // QPoint
+
+    def Enemy(int x, int y) {
+        // By default, g_enemies aren't activated until told to do so
+        this.active = false;
+        this.pos = QPointF(x, y);
+        this._speed = 256;
+
+        // Chose a random direction
+        switch (qrand() % 4) {
+            case (0) { this._curDirection = Direction.LowerLeft; break; }
+            case (1) { this._curDirection = Direction.LowerRight; break; }
+            case (2) { this._curDirection = Direction.UpperLeft; break; }
+            case (3) { this._curDirection = Direction.UpperRight; break; }
+        }
+
+        // Some graphics
+        this._sprite = MSprite(tr("enemy.sprite"));
+        this.__changeAnimationDirection(this._curDirection);
+        this._drawPos = this.pos.toPoint();
+    }
+
+    
+    def to_string() {
+        return "Enemy";
+    }
+
+    
+    // dt -- time since last update (in seconds)
+    def update(double dt) {
+        if (this.active) {
+            // Move
+            this.pos += movementChange(dt, this._curDirection, this._speed);
+    
+            // Bounds checking
+            // If there is a bounce, just reverse the direction from that it bounced from
+            if (this.pos.x < 0) {
+                if (this._curDirection == Direction.UpperLeft) {
+                    // Coming in from the upper-right
+                    this._curDirection = Direction.UpperRight;
+                } else {
+                    // Must be coming in from the lower-right
+                    this._curDirection = Direction.LowerRight;
+                }
+
+                this.__changeAnimationDirection(this._curDirection);
+            }
+            if (this.pos.y < 0) {
+                if (this._curDirection == Direction.UpperRight) {
+                    // Coming in from the upper-right
+                    this._curDirection = Direction.LowerRight;
+                } else {
+                    // Must be coming in from the lower-right
+                    this._curDirection = Direction.LowerLeft;
+                }
+
+                this.__changeAnimationDirection(this._curDirection);
+            }
+            if (this.pos.x > (g_screenWidth - 24)) {
+                if (this._curDirection == Direction.UpperRight) {
+                    // Coming in from the upper-left
+                    this._curDirection = Direction.UpperLeft;
+                } else {
+                    // Must be coming in from the lower-left
+                    this._curDirection = Direction.LowerLeft;
+                }
+
+                this.__changeAnimationDirection(this._curDirection);
+            }
+            if (this.pos.y > (g_screenHeight - 24)) {
+                if (this._curDirection == Direction.LowerRight) {
+                    // Coming in from the lower-right
+                    this._curDirection = Direction.UpperRight;
+                } else {
+                    // Must be coming in from the lower-left
+                    this._curDirection = Direction.UpperLeft;
+                }
+
+                this.__changeAnimationDirection(this._curDirection);
+            }
+
+            // Update sprite's logic
+            this._sprite.update(dt);
+            this._drawPos = this.pos.toPoint();
+            this._sprite.pos = this._drawPos;
+        }
+    }
+
+
+    // For collisions
+    def getHitbox() {
+        return QRectF(this.pos, QSizeF(24, 24));
+    }
+
+
+    // Changes whcih animation is being played for the direction
+    def __changeAnimationDirection(int dir) {
+        switch (dir) {
+            case (Direction.UpperLeft) { this._sprite.play("move_upper_left"); break; }
+            case (Direction.UpperRight) { this._sprite.play("move_upper_right"); break; }
+            case (Direction.LowerLeft) { this._sprite.play("move_lower_left"); break; }
+            case (Direction.LowerRight) { this._sprite.play("move_lower_right"); break; }
+        }
+    }
+};
+

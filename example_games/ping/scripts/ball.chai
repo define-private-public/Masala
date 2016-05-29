@@ -1,0 +1,148 @@
+// Ball object
+
+class Ball {
+    // public
+    var pos;
+    var vel;        // Velocity
+
+    // private
+    var _sprite;
+    var _drawPos;
+    var _size;
+    var _initVel;
+    var _hitSound;
+    var _scoreSound;
+    var _lastScorer;
+    var _initPos;
+
+
+    def Ball() {
+        // Init some data
+        this._size = QSize(8, 8);
+        this._initPos = QPointF(mApp.windowSize.width / 2, mApp.windowSize.height / 2);
+        this.pos = this._initPos;
+        this._initVel = 64.0;
+        this.vel = QPointF(this._initVel, this._initVel);
+        this._lastScorer = RIGHT_PADDLE;
+
+        // Load the sprite
+        this._sprite = MSprite(tr("ball.sprite"));
+        this._sprite.show("ball");
+        this._drawPos = this.pos.toPoint();
+
+        // Load the sound effect
+        this._hitSound = MSoundEffect(tr("ball_hit.wav"));
+        this._scoreSound = MSoundEffect(tr("score.wav"));
+    }
+
+
+    def to_string() {
+        return this.pos.to_string;
+    }
+
+
+    def update(double dt) {
+        // Move the ball
+        this.pos += dt * this.vel;
+
+        // ------------
+        // Check bounds
+        // ------------
+
+        // Top/Bottom Walls
+        var maxY = mApp.windowSize.height - this._size.height;
+        if (this.pos.y < 0) {
+            this.pos.ry *= -1;      // Change sign
+            this.vel.ry *= -1;      // Reverse velocity
+            this._hitSound.play();
+        } else if (this.pos.y > maxY) {
+            var diff = this.pos.y - maxY;
+            this.pos.ry = maxY - diff;
+            this.vel.ry *= -1;      // Reverse velocity
+            this._hitSound.play();
+        }
+
+        // Left/Right Walls (Gooooooooooooooaaaallll!!) (reset the ball too)
+        var score = false;
+        if (this.pos.x < 0) {
+            // Left goal, point for right
+            g_right_paddle.score += 1;
+            this._lastScorer = RIGHT_PADDLE;
+            score = true;
+        } else if (this.pos.x > (mApp.windowSize.width - this._size.width)) {
+            // Right goal, point for left
+            g_left_paddle.score += 1;
+            this._lastScorer = LEFT_PADDLE;
+            score = true;
+        }
+
+        // If score, play a noise, reset, and change window title
+        if (score) {
+            this._scoreSound.play();
+            this.reset();
+            mApp.setWindowTitle("[" + to_string(g_left_paddle.score) + "] -- Ping -- [" + to_string(g_right_paddle.score) + "]");
+        }
+
+        // Check the paddles
+        var leftIntersect = this.boundingBox().intersected(g_left_paddle.boundingBox);
+        var rightIntersect = this.boundingBox().intersected(g_right_paddle.boundingBox);
+        if (!leftIntersect.isNull) {
+            // Hit the left paddle
+            this.pos.rx += leftIntersect.width;
+            this.vel.rx *= -1;
+            this.vel.rx += this._size.width + 2;
+
+            // Adjust the Y velocity based upon hitpoint
+            var hitHeight = g_left_paddle._size.height + this._size.height;
+            var loc = map(this.pos.y, g_left_paddle.pos.y, g_left_paddle.pos.y + hitHeight, -2.0, 2.0);
+            this.vel.ry = loc * this._initVel;
+
+            // Some noise
+            this._hitSound.play();
+        } else if (!rightIntersect.isNull) {
+            this.pos.rx -= rightIntersect.width;
+            this.vel.rx *= -1;
+            this.vel.rx -= this._size.width + 2;
+
+            // Adjust the Y velocity based upon hitpoint
+            var hitHeight = g_right_paddle._size.height + this._size.height;
+            var loc = map(this.pos.y, g_right_paddle.pos.y, g_right_paddle.pos.y + hitHeight, -2.0, 2.0);
+            this.vel.ry = loc * this._initVel;
+
+            // Some noise
+            this._hitSound.play();
+        }
+
+        // Update the sprite logic
+        this._sprite.update(dt);
+        this._drawPos = this.pos.toPoint();     // Have to do this to avoid jitter on drawing
+        this._sprite.pos = this._drawPos;
+    }
+
+
+    def draw(MSpriteBatch sb) {
+        sb.add(this._sprite);
+    }
+
+
+    def boundingBox() {
+        return QRectF(this.pos, QSizeF(this._size));
+    }
+
+
+    def reset() {
+        // Reset the ball
+        this.pos = this._initPos;
+        this.vel = QPointF(this._initVel, this._initVel);
+
+        // Chage the direction to the left, if the left scored last
+        if (this._lastScorer == LEFT_PADDLE) {
+            this.vel.rx *= -1;
+        }
+
+        // Randomize the Y velocity
+        var modifier = map(qrand() % 10000, 0, 10000, -1, 1);
+        this.vel.ry *= modifier;
+    }
+};
+

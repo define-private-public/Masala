@@ -1,0 +1,93 @@
+// Paddle object
+
+global LEFT_PADDLE = 1;
+global RIGHT_PADDLE = 2;
+
+class Paddle {
+    // Public
+    var pos;
+    var speed;
+    var score;
+
+    // Private
+    var _sprite;
+    var _drawPos;
+    var _which;
+    var _size;
+
+    def Paddle(int which) {
+        // Init some data
+        this.speed = 512;
+        this.score = 0;
+        this._size = QSize(8, 48);
+
+        //  the other data
+        this._which = which;
+        if (this._which == LEFT_PADDLE) {
+            this.pos = QPointF(this._size.width, this._size.width);
+        } else if (this._which == RIGHT_PADDLE) {
+            this.pos = QPointF(mApp.windowSize.width - (2 * this._size.width), this._size.width);
+        }
+
+        // Load the sprite
+        this._sprite = MSprite(tr("paddle.sprite"));
+        this._sprite.show("paddle");
+        this._drawPos = this.pos.toPoint();
+    }
+
+
+    def to_string() {
+        if (this._which == LEFT_PADDLE) {
+            return "Left Paddle, score=" + to_string(this.score);
+        } else if (this._which == RIGHT_PADDLE) {
+            return "Right Paddle, score=" + to_string(this.score);
+        } else {
+            return "Unknown Paddle";
+        }
+    }
+
+    
+    // Called in the update() function
+    // dt -- time since last update (in seconds) 
+    def update(double dt) {
+        if (this._which == LEFT_PADDLE) {
+            // Check for key presses
+            if (Keyboard.a.isDown) {
+                this.pos += QPointF(0, -(dt * this.speed));
+            } else if (Keyboard.z.isDown) {
+                this.pos += QPointF(0, (dt * this.speed));
+            }
+        } else if (this._which == RIGHT_PADDLE) {
+            // Check for key presses
+            if (Keyboard.up.isDown) {
+                this.pos += QPointF(0, -(dt * this.speed));
+            } else if (Keyboard.down.isDown) {
+                this.pos += QPointF(0, (dt * this.speed));
+            }
+        }
+
+        // Bounds checking
+        if (this.pos.y < 0) {
+            this.pos.setY(0);
+        } else if ((this.pos.y + this._size.height) > mApp.windowSize.height) {
+            this.pos.setY(mApp.windowSize.height - this._size.height);
+        }
+
+        // Update the sprite logic
+        this._sprite.update(dt);
+        this._drawPos = this.pos.toPoint();     // Have to do this to avoid jitter on drawing
+        this._sprite.pos = this._drawPos;
+    }
+
+
+    // Called in the draw() function
+    def draw(MSpriteBatch sb) {
+        sb.add(this._sprite);
+    }
+
+
+    // Hit area
+    def boundingBox() {
+        return QRectF(this.pos, QSizeF(this._size));
+    }
+};

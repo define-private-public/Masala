@@ -1,0 +1,14 @@
+// Called once before the first update and draw routines
+def init() {
+    // Set the window 
+    mApp.setWindowTitle("[0] -- Ping -- [0]");
+
+    // Print the controls
+    print("");
+    print("Left Paddle: A & Z Keys.");
+    print("Right Paddle: Up & Down Keys.");
+
+    // Tell the engine that our game is ready to run
+    GameReady = true;
+}
+

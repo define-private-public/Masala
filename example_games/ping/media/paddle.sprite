@@ -1,0 +1,8 @@
+paddle.png
+
+frame_info:
+    paddle=8x48:0,0
+
+sequence_info:
+    paddle[looping]=paddle:10000
+

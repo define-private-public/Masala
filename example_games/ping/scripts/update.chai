@@ -1,0 +1,14 @@
+// dt -- amount of seconds that have passed (in floating point form)
+//       typically is 1/60.
+def update(double dt) {
+    // Check for quit (ESC press)
+    if (Keyboard.escape.isDown) {
+        mApp.shutdown();
+    }
+
+    // Update the game objects
+    g_left_paddle.update(dt);
+    g_right_paddle.update(dt);
+    g_ball.update(dt);
+}
+

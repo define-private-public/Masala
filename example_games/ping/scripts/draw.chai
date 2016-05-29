@@ -1,0 +1,7 @@
+// What to draw
+def draw(MSpriteBatch sb) {
+    g_left_paddle.draw(sb);
+    g_right_paddle.draw(sb);
+    g_ball.draw(sb);
+}
+

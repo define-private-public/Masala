@@ -1,0 +1,16 @@
+// setup.chai -- called before "load.chai" (or anything else)
+//
+// In this file you are supposed to initialize the window size and load up other
+// .chai files you wnat to use
+// e.g:
+//
+// use("saves.chai");
+// use("map.chai");
+// ...
+
+mApp.initWindowSize(QSize(320, 240));
+
+use("functions.chai");
+use("paddle.chai");
+use("ball.chai");
+

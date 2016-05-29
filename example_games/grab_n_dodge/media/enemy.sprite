@@ -1,0 +1,29 @@
+enemysheet.png
+
+frame_info:
+  // Bottom-Left
+  lower_right_1=24x24:0,0
+  lower_right_2=24x24:24,0
+  lower_right_3=24x24:48,0
+
+  // Down
+  upper_right_1=24x24:0,24
+  upper_right_2=24x24:24,24
+  upper_right_3=24x24:48,24
+
+  // Right
+  upper_left_1=24x24:0,48
+  upper_left_2=24x24:24,48
+  upper_left_3=24x24:48,48
+
+  // Left
+  lower_left_1=24x24:0,72
+  lower_left_2=24x24:24,72
+  lower_left_3=24x24:48,72
+
+sequence_info:
+  move_lower_right[looping]=lower_right_1:150,lower_right_2:150,lower_right_3:150
+  move_upper_right[looping]=upper_right_1:150,upper_right_2:150,upper_right_3:150
+  move_upper_left[looping]=upper_left_1:150,upper_left_2:150,upper_left_3:150
+  move_lower_left[looping]=lower_left_1:150,lower_left_2:150,lower_left_3:150
+

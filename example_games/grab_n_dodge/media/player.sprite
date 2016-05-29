@@ -1,0 +1,29 @@
+playersheet.png
+
+frame_info:
+  // Up
+  up_1=24x24:0,0
+  up_2=24x24:24,0
+  up_3=24x24:48,0
+
+  // Down
+  down_1=24x24:0,24
+  down_2=24x24:24,24
+  down_3=24x24:48,24
+
+  // Right
+  right_1=24x24:0,48
+  right_2=24x24:24,48
+  right_3=24x24:48,48
+
+  // Left
+  left_1=24x24:0,72
+  left_2=24x24:24,72
+  left_3=24x24:48,72
+
+sequence_info:
+  move_up[looping]=up_1:150,up_2:150,up_3:150
+  move_down[looping]=down_1:150,down_2:150,down_3:150
+  move_right[looping]=right_1:150,right_2:150,right_3:150
+  move_left[looping]=left_1:150,left_2:150,left_3:150
+

@@ -1,0 +1,23 @@
+// dt -- amount of seconds that have passed (in floating point form)
+//       typically is 1/60.
+def update(double dt) {
+    // Check for quit
+    if (Keyboard.escape.isDown) {
+        mApp.shutdown();
+    }
+
+    // Press r for reset (only if dead)
+    if (!g_player.alive && Keyboard.r.isDown) {
+        init();
+    }
+
+    // Update the g_enemies
+    for (var i = 0; i < g_numEnemiesActive; i += 1) {
+        g_enemies[i].update(dt);
+    }
+
+    // Coin & Player
+    g_coin.update(dt);
+    g_player.update(dt);
+}
+

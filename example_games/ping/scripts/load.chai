@@ -1,0 +1,9 @@
+// Called once per game to initilize the content
+
+def load() {
+    // The globals
+    global g_left_paddle = Paddle(LEFT_PADDLE);
+    global g_right_paddle = Paddle(RIGHT_PADDLE);
+    global g_ball = Ball();
+}
+

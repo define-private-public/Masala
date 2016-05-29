@@ -1,0 +1,144 @@
+// player.chai -- the Player object
+
+// Who you (the player) plays as. 
+// Move around with the arrow keys trying to collect g_coins, while dodging the
+// g_enemies that are flying about.
+//
+// This holds all of the collision information for the game. 
+class Player {
+    // Public
+    var pos;            // QPointF
+    var alive;         // bool
+
+    // Private
+    var _curDirection;  // Direction Enum
+    var _speed;         // double (pixels/sec)
+    var _sprite;        // MSprite
+    var _drawPos;       // QPoint
+    var _deathSprite;   // MSprite
+    var _g_scoreEffect;   // MSoundEffect
+    var _deathEffect;   // MSoundEffect
+
+    def Player() {
+        this.pos = QPointF(128, 128);
+        this._speed = 256;
+        this._curDirection = Direction.Right;
+
+        this.alive = true;
+        this._sprite = MSprite(tr("player.sprite"));
+        this._sprite.play("move_right");
+        this._drawPos = this.pos.toPoint();
+
+        this._deathSprite = MSprite(tr("playerdeath.sprite"));
+        this._deathSprite.hide();
+
+        // Don't forget the sound effects
+        this._g_scoreEffect = MSoundEffect(tr("pickup_coin.wav"));
+        this._deathEffect = MSoundEffect(tr("player_death.wav"));
+    }
+
+    
+    def to_string() {
+        return "Player";
+    }
+
+
+    def init() {
+        this.alive = true;
+        this.pos = QPointF(128, 128);
+        this._curDirection = Direction.Right;
+
+        this._sprite.hide(false);
+        this._sprite.play("move_right");
+        this._drawPos = this.pos.toPoint();
+        this._deathSprite.hide();
+    }
+
+    
+    // dt -- time since last update (in seconds)
+    def update(double dt) {
+        if (this.alive) {
+            // Check for direction change (with Keyboard)
+            if (Keyboard.up.isDown && (this._curDirection != Direction.Up)) {
+                this._curDirection = Direction.Up;
+                this._sprite.play("move_up");
+            } else if (Keyboard.down.isDown && (this._curDirection != Direction.Down)) {
+                this._curDirection = Direction.Down;
+                this._sprite.play("move_down");
+            } else if (Keyboard.left.isDown && (this._curDirection != Direction.Left)) {
+                this._curDirection = Direction.Left;
+                this._sprite.play("move_left");
+            } else if (Keyboard.right.isDown && (this._curDirection != Direction.Right)) {
+                this._curDirection = Direction.Right;
+                this._sprite.play("move_right");
+            }
+
+            // Do the actual move
+            this.pos += movementChange(dt, this._curDirection, this._speed);
+    
+            // Bounds checking
+            if (this.pos.x < 0) {
+                this.pos.rx = 0;
+            }
+            if (this.pos.y < 0) {
+                this.pos.ry = 0;
+            }
+            if (this.pos.x > (g_screenWidth - 24)) {
+                this.pos.rx = g_screenWidth - 24;
+            }
+            if (this.pos.y > (g_screenHeight - 24)) {
+                this.pos.ry = g_screenHeight - 24;
+            }
+    
+            // Check for a collision with the g_coin
+            var hitbox = this.getHitbox();
+            if (hitbox.intersects(g_coin.hitbox)) {
+                // Increase g_score
+                g_score += 10;
+                this._g_scoreEffect.play();
+                updateWindowTitle();
+                print("Score @ " + to_string(GameTime.secs) + " seconds");
+    
+                // Reset the g_coin
+                g_coin.resetLocation();
+    
+                // Active the next enemy
+                if (g_numEnemiesActive < g_maxEnemies) {
+                    g_enemies[g_numEnemiesActive].active = true;
+                    g_enemySpriteBatch.add(g_enemies[g_numEnemiesActive]._sprite);
+                    g_numEnemiesActive += 1;
+                }
+            }
+    
+            // Check for collisons with all of the active g_enemies
+            for (var i = 0; i < g_numEnemiesActive; i += 1) {
+                if (hitbox.intersects(g_enemies[i].getHitbox())) {
+                    // There was a hit, kill it
+                    this.alive = false;
+                    this._sprite.hide();
+                    mApp.setWindowTitle("[Grab n' Dodge]   Score: " + to_string(g_score) + "   *GAME OVER*   Press R to reset"); 
+
+                    // Show the death sprite (and make a dying sound)
+                    this._deathSprite.hide(false);
+                    this._deathSprite.pos = this._drawPos + QPoint(-12, -12);
+                    this._deathSprite.play("die");
+                    this._deathEffect.play();
+                }
+            }
+    
+            // Update sprite's logic
+            this._sprite.update(dt);
+            this._drawPos = this.pos.toPoint();
+            this._sprite.pos = this._drawPos;
+        } else {
+            this._deathSprite.update(dt);
+        }
+    }
+
+
+    // Make a hitbox for the player
+    def getHitbox() {
+        return QRectF(this.pos, QSizeF(24, 24));
+    }
+};
+

@@ -1,0 +1,6 @@
+// Some useful functions
+
+// Maps the value x from the range of [a, b] to [p, q]
+def map(double x, double a, double b, double p, double q) {
+    return (x - a) * (q - p) / (b - a) + p;
+}

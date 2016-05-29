@@ -1,0 +1,8 @@
+// Called once before the first update and draw routines
+// Think of it as a way to reset the game to its initial state
+
+def init() {
+    // Tell the engine that our game is ready to run
+    GameReady = true;
+}
+

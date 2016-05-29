@@ -1,0 +1,16 @@
+// direction.chai -- Direciton enumeration
+
+global Direction = Dynamic_Object();
+
+Direction.None = 0;
+
+Direction.Up = 1;
+Direction.Down = 2;
+Direction.Left = 3;
+Direction.Right = 4;
+
+Direction.UpperLeft = 5;
+Direction.UpperRight = 6;
+Direction.LowerLeft = 7;
+Direction.LowerRight = 8;
+

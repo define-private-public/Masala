@@ -1,0 +1,45 @@
+// functions.chai -- A Collection of functions to use
+
+// Computes a delta movement change for a given time, speed, and direction.
+//   dt -- float in second since the last movement
+//   dir -- Direction movement in (Direction enum)
+//   speed -- pixels/sec (normally an int)
+//
+//   returns: A QPointF of the change
+def movementChange(double dt, int dir, double speed) {
+    var dist = dt * speed;
+    switch (dir) {
+        case (Direction.Up) {
+            return QPointF(0, -dist);
+        }
+        case (Direction.Down) {
+            return QPointF(0, dist);
+        }
+        case (Direction.Left) {
+            return QPointF(-dist, 0);
+        }
+        case (Direction.Right) {
+            return QPointF(dist, 0);
+        }
+        case (Direction.UpperLeft) {
+            return QPointF(-dist, -dist);
+        }
+        case (Direction.UpperRight) {
+            return QPointF(dist, -dist);
+        }
+        case (Direction.LowerLeft) {
+            return QPointF(-dist, dist);
+        }
+        case (Direction.LowerRight) {
+            return QPointF(dist, dist);
+        }
+    }
+    // All cases should be hit
+}
+
+
+// A Utility function to update the window title along with the g_score
+def updateWindowTitle() {
+    mApp.setWindowTitle("[Grab n' Dodge]   Score: " + to_string(g_score)); 
+}
+

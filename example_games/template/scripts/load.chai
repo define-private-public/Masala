@@ -1,0 +1,6 @@
+// Called once per application to initilize the content
+// this is a good place to declare global variables
+
+def load() {
+}
+

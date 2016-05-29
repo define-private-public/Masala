@@ -1,0 +1,13 @@
+playerdeath.png
+
+frame_info:
+    frame_1=48x48:0,0
+    frame_2=48x48:48,0
+    frame_3=48x48:96,0
+    frame_4=48x48:0,48
+    frame_5=48x48:48,48
+    frame_6=48x48:96,48
+
+sequence_info:
+  die[]=frame_1:400,frame_2:400,frame_3:400,frame_4:400,frame_5:400,frame_6:400
+

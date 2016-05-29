@@ -1,0 +1,9 @@
+// What to draw
+def draw(MSpriteBatch sb) {
+    sb.add(g_background.asSprite);
+    sb.add(g_coin._sprite);
+    sb.addBatch(g_enemySpriteBatch);
+    sb.add(g_player._sprite);
+    sb.add(g_player._deathSprite);
+}
+

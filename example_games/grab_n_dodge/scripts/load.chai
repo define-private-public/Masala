@@ -1,0 +1,85 @@
+// Called once per game to initilize the content
+// this is good for global variables
+
+def load() {
+    // Some globals
+    global g_screenWidth = 816;
+    global g_screenHeight = 816;
+    global g_score = 0;
+
+    global g_player = Player();
+    global g_coin = Coin();
+    global g_background = MTileMap(tr("background.txt"));
+
+    // Have to do this really annoying hack instead just dynamically creating g_enemies
+    global g_numEnemiesActive = 0;
+    global g_maxEnemies = 64;
+    global g_enemies = [
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24)),
+       Enemy(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24))
+    ]
+    global g_enemySpriteBatch = MSpriteBatch();
+}
+

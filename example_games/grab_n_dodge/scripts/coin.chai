@@ -1,0 +1,45 @@
+// coin.chai -- things to collect!
+
+// This is the object that the g_player is trying to collect
+class Coin {
+    // public
+    var pos;        // QPointF
+    var hitbox;     // QRectF
+    
+    // Private
+    var _sprite;    // MSprite
+    var _drawPos;   // QPoint
+
+    
+    def Coin() {
+        // Position and collision
+        this.pos = QPointF(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24));
+        this.hitbox = QRectF(this.pos, QSizeF(24, 24));
+        
+        // Graphics
+        this._sprite = MSprite(tr("coin.sprite"));
+        this._sprite.play("stand");
+        this._drawPos = this.pos.toPoint();
+    }
+
+
+    def to_string() {
+        return "Coin";
+    }
+
+
+    def update(double dt) {
+        // Update the sprite's logic
+        this._sprite.update(dt);
+        this._drawPos = this.pos.toPoint();
+        this._sprite.pos = this._drawPos;
+    }
+
+
+    // Change the location of the coin and the hitbox location
+    def resetLocation() {
+        this.pos = QPointF(qrand() % (g_screenWidth - 24), qrand() % (g_screenHeight - 24));
+        this.hitbox.setRect(this.pos.x, this.pos.y, 24, 24);
+    }
+};
+

@@ -1,0 +1,4 @@
+// What to draw
+def draw(MSpriteBatch sb) {
+}
+

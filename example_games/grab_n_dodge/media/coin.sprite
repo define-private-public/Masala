@@ -1,0 +1,15 @@
+coinsheet.png
+
+frame_info:
+  // Waiting
+  float_center=24x24:0,0
+  float_down=24x24:24,0
+  float_up=24x24:48,0
+
+  // Flash
+  shine_1=24x24:24,24
+  shine_2=24x24:24,24
+  shine_3=24x24:48,24
+
+sequence_info:
+  stand[looping]=float_center:450,float_down:450,float_center:450,float_up:450,float_center:450,float_down:450,float_center:450,float_up:450,float_center:450,float_down:450,float_center:450,float_up:450,float_center:450,float_down:450,float_center:450,float_up:450,float_center:450,float_down:450,float_center:450,float_up:450,shine_1:200,shine_2:20,shine_3:200

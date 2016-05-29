@@ -1,0 +1,19 @@
+// Called once before the first update and draw routines
+// Think of this as a way to reset the game to its initial state
+def init() {
+    // turn the map on
+    g_background.asSprite.show(MTileMap_FrameName);
+
+    // Reset some values
+    g_player.init();
+    g_score = 0;
+    g_numEnemiesActive = 0;
+    g_enemySpriteBatch.clear();
+ 
+    // Update the window title
+    updateWindowTitle();
+
+    // Tell the engine that our game is ready to run
+    GameReady = true;
+}
+
