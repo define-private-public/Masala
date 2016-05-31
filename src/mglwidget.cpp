@@ -24,7 +24,7 @@ MGLWidget::MGLWidget(QSize size, QWidget *parent) :
     if (__size.height() < 16)
         __size.setHeight(16);
 
-    mApp->chai().add_global(chaiscript::var(&__spriteBatch), "spriteBatch");
+    mApp->chai().add_global(chaiscript::var(&__spriteBatch), "MGLWidget__spriteBatch");
 }
 
 
@@ -99,7 +99,7 @@ void MGLWidget::paintGL() {
 
     // Draw
     try {
-        mApp->chai().eval("draw(spriteBatch);");
+        mApp->chai().eval("draw(MGLWidget__spriteBatch);");
         __spriteBatch.drawAll();
         __spriteBatch.clear();
     } catch (std::exception &ex) {
