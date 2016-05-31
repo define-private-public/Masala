@@ -11,6 +11,10 @@ release it so that others may learn from what I have done here, or if anyone
 else wants to explore making a game engine with ChaiScript.  It's not a bad
 language in my opinion, and makes scripting C++ applications super simple.
 
+The official website for this project can be found at:
+
+    https://gitlab.com/define-private-public/Masala
+
 
 Features
 --------
