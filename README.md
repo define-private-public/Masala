@@ -37,7 +37,7 @@ This requires Qt's Multimedia package to be installed (for QSoundEffect).  If
 your installtion of Qt doesn't have it, you'll need to install it.
 
 This uses ChaiScript 5.8.0.  This version of ChaiScript can be found in the
-`third_party` directory.  ChaiScript is statically compiled into the game
+`third_party/` directory.  ChaiScript is statically compiled into the game
 engine.  If you want to dynamically link it you will need to compile a `.so`
 file of the library, modify `src/masala.pro` and `src/masalaapp.cpp`.  As well
 as include the .so as the same directory as `masala.bin`
@@ -75,9 +75,8 @@ options:
 
 Sample Games
 ------------
-You can find some example games in the `example_games` direction.  Drop the
-contents of any of those folders into the `scripts` folder located in `src`.
-See the above section (`masala.ini`) for how to change out games.
+You can find some example games in the `example_games/` directory.  See the
+above section (`masala.ini`) for how to change out games.
 
 `ping` is the default loaded game.  It's a clone of a classic atari game.  Use
 the `A` & `Z` keys for the left player, and `Up` & `Down` arrow keys for the
@@ -112,5 +111,6 @@ License
 -------
 In a nutshell, everything in this project is GPLv3 (see `LICENSE` for more
 details).  The exception though is for ChaiScript which is found in the
-`third_party` directory; see it's `LICENSE` file for details.
+`third_party/` directory; see those project's respective license files for well,
+their licenses.
 
