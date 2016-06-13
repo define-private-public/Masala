@@ -54,8 +54,8 @@ play a game, just run the `masala.bin` executable.   By default, it is setup to
 play a game called `ping`.
 
 This was developed on a Linux system.  I was able to successfully build the
-project on Windows and OS X, but I did run into some issues with the GNU
-readline dependency (commented out its usage).
+project on Windows, but I did run into some issues with the GNU readline
+dependency for that platform (I had to comment out its usage).
 
 
 `masala.ini`
