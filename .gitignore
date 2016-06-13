@@ -38,3 +38,8 @@ Makefile*
 
 # binaries
 masala.bin
+
+# OS X
+.DS_Store
+.qmake.stash
+*.app

@@ -12,12 +12,20 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE *= -O3
 
 
+# Platform specific
+macx {
+    INCLUDEPATH += /usr/local/opt/readline/include
+    LIBS += -L/usr/local/opt/readline/lib
+    TARGET = masala
+}
+
+
 # Third Party stuff
 # Chaiscript
 CHAISCRIPT_DIR = ../third_party/ChaiScript-5.8.0
-INCLUDEPATH = $${CHAISCRIPT_DIR}/include
-LIBS += -ldl
+INCLUDEPATH += $${CHAISCRIPT_DIR}/include
 #LIBS = -L$${CHAISCRIPT_DIR}/lib -lchaiscript_stdlib-5.8.0
+LIBS += -ldl
 LIBS += -lreadline
 
 

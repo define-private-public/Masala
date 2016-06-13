@@ -43,7 +43,8 @@ file of the library, modify `src/masala.pro` and `src/masalaapp.cpp`.  As well
 as include the .so as the same directory as `masala.bin`
 
 This project also requires GNU Readline.  Version 6.x was used to make this.
-It is not included in this repository.
+It is not included in this repository.  If you are on OS X, I recommend
+installing the package `readline` from homebrew (`brew install readline`).
 
 
 Building & Running
