@@ -36,7 +36,7 @@ Requirements
 This requires Qt's Multimedia package to be installed (for QSoundEffect).  If
 your installtion of Qt doesn't have it, you'll need to install it.
 
-This uses ChaiScript 6.0.0.  This version of ChaiScript can be found in the
+This uses ChaiScript 5.8.0.  This version of ChaiScript can be found in the
 `third_party/` directory.  ChaiScript is statically compiled into the game
 engine.  If you want to dynamically link it you will need to compile a `.so`
 file of the library, modify `src/masala.pro` and `src/masalaapp.cpp`.  As well

@@ -8,6 +8,7 @@
 #include "mchai.h"
 #include "chaiscript/chaiscript.hpp"
 #include "chaiscript/utility/utility.hpp"
+#include "chaiscript/chaiscript_stdlib.hpp"
 #include <QMatrix4x4>
 #include <QTimer>
 #include <iostream>
@@ -26,8 +27,9 @@ MasalaApp::MasalaApp(int &argc, char **argv) :
     bool useTerminal = __settings.value("terminal", false).toBool();
 
     // Setup the Chaiscript engine
+    std::vector<std::string> ev;
     std::vector<std::string> usePaths({scriptDirPath});
-    __chai = new chaiscript::ChaiScript({}, usePaths, chaiscript::default_options());
+    __chai = new chaiscript::ChaiScript(chaiscript::Std_Lib::library(), ev, usePaths);
 
     // Add stuff to chaiscript
     chaiQt::bindAll(*__chai);

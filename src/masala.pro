@@ -22,9 +22,9 @@ macx {
 
 # Third Party stuff
 # Chaiscript
-CHAISCRIPT_DIR = ../third_party/ChaiScript-6.0.0
+CHAISCRIPT_DIR = ../third_party/ChaiScript-5.8.0
 INCLUDEPATH += $${CHAISCRIPT_DIR}/include
-#LIBS = -L$${CHAISCRIPT_DIR}/lib -lchaiscript_stdlib-6.0.0
+#LIBS = -L$${CHAISCRIPT_DIR}/lib -lchaiscript_stdlib-5.8.0
 LIBS += -ldl
 LIBS += -lreadline
 
